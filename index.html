@@ -1,0 +1,50 @@
+import 'package:flutter/material.dart';
+
+class AddFoodPage extends StatefulWidget {
+  @override
+  _AddFoodPageState createState() => _AddFoodPageState();
+}
+
+class _AddFoodPageState extends State<AddFoodPage> {
+  final TextEditingController foodController = TextEditingController();
+  final TextEditingController calorieController = TextEditingController();
+
+  void submitFood() {
+    String food = foodController.text;
+    int calories = int.parse(calorieController.text);
+
+    print("Food: $food Calories: $calories");
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Food Added Successfully")),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Add Food")),
+      body: Padding(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          children: [
+            TextField(
+              controller: foodController,
+              decoration: InputDecoration(labelText: "Food Name"),
+            ),
+            TextField(
+              controller: calorieController,
+              decoration: InputDecoration(labelText: "Calories"),
+              keyboardType: TextInputType.number,
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: submitFood,
+              child: Text("Save"),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
